@@ -1,0 +1,900 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#211713">
+<title>SpaedrNG | App Store</title>
+
+<style>
+:root{
+  --bg:#120d0b;
+  --surface:#211b19;
+  --surface2:#2b2320;
+  --border:#49403c;
+  --text:#f5f1ef;
+  --muted:#aaa09b;
+  --accent:#d8c7bf;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  min-height:100vh;
+  font-family:Tahoma,Arial,sans-serif;
+  background:radial-gradient(ellipse at 50% 0,#39231b 0%,#211510 38%,var(--bg) 85%);
+  color:var(--text)
+}
+button,input,a{font:inherit}
+button,a{-webkit-tap-highlight-color:transparent}
+a{color:inherit;text-decoration:none}
+button{cursor:pointer}
+
+.topbar{
+  position:sticky;top:0;z-index:10;
+  background:#160f0ddd;
+  backdrop-filter:blur(18px);
+  border-bottom:1px solid #ffffff0d
+}
+.topbar-inner{
+  max-width:760px;margin:auto;padding:14px 16px;
+  display:flex;align-items:center;gap:12px
+}
+.brand-logo{
+  width:43px;height:43px;
+  display:grid;place-items:center;
+  border-radius:14px;
+  background:linear-gradient(145deg,#8d5542,#43271e);
+  font-size:23px;font-weight:bold;
+  border:1px solid #ffffff20
+}
+.brand-name{font-size:20px;font-weight:900}
+.brand-name span{color:#d6a18b}
+.brand-subtitle{font-size:11px;color:var(--muted);margin-top:5px}
+
+.container{
+  max-width:760px;
+  margin:auto;
+  padding:22px 15px 42px
+}
+.search-wrap{position:relative;margin-bottom:22px}
+.search-symbol{
+  position:absolute;right:15px;top:50%;
+  transform:translateY(-50%);
+  color:var(--muted)
+}
+#search{
+  width:100%;padding:15px 42px 15px 14px;
+  background:#241b18;
+  border:1px solid var(--border);
+  border-radius:16px;color:white;
+  outline:none;font-size:13px
+}
+#search:focus{border-color:#9b7666}
+
+/* دسته‌بندی‌ها */
+.category-title{
+  font-size:14px;
+  color:#c9b7ae;
+  margin:0 3px 13px
+}
+.category-tabs{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:11px;
+  margin-bottom:26px
+}
+.category-tab{
+  min-height:94px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:9px;
+  border:1px solid var(--border);
+  border-radius:19px;
+  background:linear-gradient(145deg,#28201d,#191311);
+  color:#d5c9c3;
+  transition:.2s
+}
+.category-tab .category-icon{font-size:25px}
+.category-tab .category-name{font-size:13px;font-weight:bold}
+.category-tab.active{
+  background:linear-gradient(145deg,#624537,#38251e);
+  border-color:#a47b68;
+  color:#fff
+}
+.category-tab:active{transform:scale(.98)}
+
+.section-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-bottom:14px
+}
+.section-head h2{font-size:16px}
+.counter{
+  font-size:11px;
+  color:#d9b6a7;
+  background:#39251e;
+  padding:7px 10px;
+  border-radius:9px
+}
+.app-list{display:grid;gap:13px}
+.app-card{
+  background:linear-gradient(145deg,#28201d,#191311);
+  border:1px solid var(--border);
+  border-radius:21px;padding:16px;
+  transition:border-color .2s,transform .2s;
+  cursor:pointer
+}
+.app-card:hover{border-color:#8a695b}
+.app-head{display:flex;align-items:center;gap:14px}
+.app-icon-link{
+  width:76px;height:76px;flex-shrink:0;
+  border-radius:20px;overflow:hidden;
+  background:#171615;border:1px solid #ffffff17;
+  display:grid;place-items:center
+}
+.app-icon{width:100%;height:100%;object-fit:cover}
+.nova-fallback{
+  width:100%;height:100%;
+  display:grid;place-items:center;
+  background:#25283b;color:#aebfff;
+  font-size:30px;font-weight:bold
+}
+.app-meta{min-width:0;flex:1}
+.app-title{font-size:19px;font-weight:900;margin-bottom:8px}
+.app-subtitle{color:var(--muted);font-size:12px;line-height:1.9}
+.app-badge{
+  display:inline-block;margin-top:7px;
+  padding:5px 9px;border-radius:20px;
+  background:#392923;color:#dfb6a3;font-size:10px
+}
+.app-description{
+  color:#c3b9b4;font-size:12px;
+  line-height:2;margin:15px 0
+}
+.primary-actions{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:9px
+}
+.action-btn{
+  min-height:43px;padding:11px 8px;
+  display:flex;align-items:center;
+  justify-content:center;gap:7px;
+  border-radius:13px;text-align:center;
+  font-size:11px;font-weight:bold;
+  border:1px solid #ffffff1a
+}
+.action-primary{background:#594034;color:#fff}
+.action-dark{background:#28211e;color:#eee}
+.action-btn:active{transform:scale(.98)}
+
+.empty-state{
+  display:none;text-align:center;
+  color:var(--muted);padding:30px 18px;
+  font-size:13px;line-height:2;
+  background:#211a17;border:1px solid var(--border);
+  border-radius:18px
+}
+.empty-icon{font-size:32px;margin-bottom:10px;display:block}
+footer{
+  max-width:760px;margin:auto;
+  padding:0 15px 28px;
+  text-align:center;color:#8e817a;
+  font-size:10px;line-height:2
+}
+
+/* صفحه جزئیات */
+#details{display:none;min-height:100vh}
+.details-top{
+  max-width:760px;margin:auto;padding:23px 17px 12px;
+  display:flex;align-items:center
+}
+.back-btn{
+  border:0;background:transparent;color:#f4eeeb;
+  display:flex;align-items:center;gap:9px;
+  font-size:18px;padding:8px 0
+}
+.back-arrow{font-size:30px;line-height:1}
+.details-container{
+  max-width:760px;margin:auto;
+  padding:15px 15px 38px
+}
+.details-hero{
+  display:flex;align-items:center;
+  gap:17px;margin:15px 4px 30px
+}
+.details-icon{
+  width:132px;height:132px;flex-shrink:0;
+  border-radius:28px;overflow:hidden;
+  background:#171514;border:1px solid #ffffff13
+}
+.details-icon img{width:100%;height:100%;object-fit:cover}
+.details-icon .nova-fallback{font-size:54px}
+.details-heading{flex:1;min-width:0}
+.details-heading h1{
+  font-size:27px;line-height:1.5;
+  overflow-wrap:anywhere
+}
+.details-heading p{
+  font-size:13px;color:var(--muted);
+  margin:8px 0 15px;line-height:1.8
+}
+.update-btn{
+  display:inline-flex;justify-content:center;
+  align-items:center;min-width:120px;
+  padding:12px 23px;border:0;
+  border-radius:30px;background:#694737;
+  color:#fff;font-weight:bold
+}
+.stats{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  border:1px solid var(--border);
+  border-radius:24px;background:#29211eaa;
+  padding:19px 8px;margin-bottom:42px
+}
+.stat{text-align:center;min-width:0}
+.stat-label{font-size:11px;color:#c3b7b1;margin-bottom:13px}
+.stat-value{
+  font-size:15px;font-weight:bold;
+  overflow-wrap:anywhere
+}
+.detail-section{
+  margin-bottom:36px;
+  scroll-margin-top:18px
+}
+.detail-section h2{
+  font-size:15px;font-weight:500;
+  color:#b8aaa3;margin-bottom:16px;padding-right:3px
+}
+.about-box,.info-box{
+  border:1px solid var(--border);
+  border-radius:24px;background:#28211eaa;overflow:hidden
+}
+.about-box{
+  padding:24px 20px;font-size:14px;
+  line-height:2.2;color:#eee6e2
+}
+.info-row{
+  display:flex;align-items:center;
+  justify-content:space-between;gap:12px;
+  padding:17px 18px;
+  border-bottom:1px solid #ffffff13;
+  font-size:13px
+}
+.info-row:last-child{border-bottom:0}
+.info-label{color:#b5aaa5;flex-shrink:0}
+.info-value{
+  text-align:left;direction:ltr;
+  overflow-wrap:anywhere
+}
+.github-btn{
+  display:flex;align-items:center;
+  justify-content:center;gap:12px;
+  min-height:64px;padding:15px;
+  border:1px solid var(--border);
+  border-radius:32px;background:#28211e;
+  color:#fff;font-size:16px;font-weight:bold
+}
+.github-btn svg{width:22px;height:22px;flex-shrink:0}
+
+.details-version-list{margin-top:16px;display:grid;gap:10px}
+.details-version{
+  display:flex;align-items:center;gap:12px;
+  padding:13px;border:1px solid var(--border);
+  border-radius:15px;background:#241c19
+}
+.version-symbol{
+  width:39px;height:39px;
+  display:grid;place-items:center;
+  border-radius:12px;background:#342721;
+  flex-shrink:0
+}
+.version-info{flex:1;min-width:0}
+.version-name{font-size:12px;font-weight:bold;margin-bottom:5px}
+.version-desc{font-size:10px;color:var(--muted);line-height:1.8}
+.download-btn{
+  padding:10px 12px;border:0;
+  border-radius:10px;background:#694737;
+  color:white;font-size:11px;font-weight:bold;
+  white-space:nowrap
+}
+.details-version .download-btn:active{transform:scale(.97)}
+.hidden{display:none!important}
+
+@media(max-width:430px){
+  .container{padding:19px 12px 32px}
+  .app-card{padding:14px}
+  .app-icon-link{width:66px;height:66px;border-radius:17px}
+  .app-title{font-size:17px}
+  .details-container{padding:12px 15px 32px}
+  .details-hero{gap:13px;margin:13px 0 29px}
+  .details-icon{width:104px;height:104px;border-radius:24px}
+  .details-heading h1{font-size:23px}
+  .details-heading p{font-size:12px;margin:5px 0 10px}
+  .update-btn{min-width:105px;padding:10px 18px}
+  .stats{padding:17px 5px;border-radius:22px}
+  .stat-label{font-size:10px;margin-bottom:12px}
+  .stat-value{font-size:13px}
+  .about-box{padding:20px 16px;font-size:13px}
+  .info-row{padding:16px 14px;font-size:12px}
+  .github-btn{font-size:15px;min-height:60px}
+  .details-version{gap:8px;padding:10px}
+  .version-symbol{width:34px;height:34px}
+  .download-btn{padding:10px 9px}
+}
+@media(max-width:350px){
+  .details-icon{width:85px;height:85px}
+  .details-heading h1{font-size:20px}
+  .stat-value{font-size:11px}
+  .stat-label{font-size:9px}
+  .version-desc{font-size:9px}
+}
+</style>
+</head>
+
+<body>
+
+<header class="topbar" id="store-header">
+  <div class="topbar-inner">
+    <div class="brand-logo">S</div>
+    <div>
+      <div class="brand-name"><span>S</span>paedrNG</div>
+      <div class="brand-subtitle">فروشگاه برنامه‌های اندروید</div>
+    </div>
+  </div>
+</header>
+
+<main class="container" id="store-page">
+
+  <div class="search-wrap">
+    <span class="search-symbol">⌕</span>
+    <input id="search" type="search"
+      placeholder="جستجوی برنامه..."
+      autocomplete="off"
+      aria-label="جستجوی برنامه‌ها">
+  </div>
+
+  <div class="category-title">دسته‌بندی فروشگاه</div>
+
+  <div class="category-tabs">
+    <button class="category-tab active" data-category="apps" type="button">
+      <span class="category-icon">📱</span>
+      <span class="category-name">برنامه‌ها</span>
+    </button>
+
+    <button class="category-tab" data-category="panels" type="button">
+      <span class="category-icon">🌐</span>
+      <span class="category-name">وب پنل‌ها</span>
+    </button>
+  </div>
+
+  <!-- دسته برنامه‌ها -->
+  <section id="apps-category">
+
+    <div class="section-head">
+      <h2>برنامه‌های اندروید</h2>
+      <span class="counter" id="counter">۲ برنامه</span>
+    </div>
+
+    <div class="app-list" id="app-list">
+
+      <!-- MLM VPN -->
+      <article class="app-card searchable"
+        data-app="mlm"
+        data-name="mlm vpn mlmvpn وی پی ان vpn">
+
+        <div class="app-head">
+          <div class="app-icon-link">
+            <img class="app-icon"
+              src="https://raw.githubusercontent.com/mlmvpn/mlmvpn_android/main/app/src/main/res/mipmap-xxxhdpi/ic_launcher.webp"
+              alt="MLM VPN">
+          </div>
+
+          <div class="app-meta">
+            <h3 class="app-title">MLM VPN</h3>
+            <p class="app-subtitle">برنامه VPN برای اندروید</p>
+            <span class="app-badge">نسخه 1.2.40</span>
+          </div>
+        </div>
+
+        <p class="app-description">
+          نسخه مناسب دستگاه خود را انتخاب کنید. برای مشاهده اطلاعات کامل برنامه، جزئیات را باز کنید.
+        </p>
+
+        <div class="primary-actions">
+          <button class="action-btn action-dark"
+            type="button" onclick="openDetails('mlm')">
+            ⓘ جزئیات برنامه
+          </button>
+
+          <a class="action-btn action-primary"
+            href="https://github.com/mlmvpn/mlmvpn_android/releases#release-v1.2.40"
+            target="_blank" rel="noopener noreferrer">
+            ↗ صفحه دانلود
+          </a>
+        </div>
+      </article>
+
+      <!-- Nova Proxy -->
+      <article class="app-card searchable"
+        data-app="nova"
+        data-name="nova proxy nova client نوا پراکسی">
+
+        <div class="app-head">
+          <div class="app-icon-link">
+            <img class="app-icon"
+              src="https://raw.githubusercontent.com/IRNova/Nova-Proxy-App/main/logo.svg"
+              alt="Nova Proxy"
+              onerror="this.style.display='none';this.nextElementSibling.style.display='grid'">
+
+            <span class="nova-fallback" style="display:none">N</span>
+          </div>
+
+          <div class="app-meta">
+            <h3 class="app-title">Nova Proxy</h3>
+            <p class="app-subtitle">ابزار پراکسی اندروید</p>
+            <span class="app-badge">نسخه 1.30.2</span>
+          </div>
+        </div>
+
+        <p class="app-description">
+          نسخه جدید Nova Client. برای مشاهده اطلاعات و انتخاب نسخه مناسب دستگاه خود وارد جزئیات شوید.
+        </p>
+
+        <div class="primary-actions">
+          <button class="action-btn action-dark"
+            type="button" onclick="openDetails('nova')">
+            ⓘ جزئیات برنامه
+          </button>
+
+          <a class="action-btn action-primary"
+            href="https://github.com/IRNova/Nova-Client/releases/tag/v1.30.2"
+            target="_blank" rel="noopener noreferrer">
+            ↗ صفحه دانلود
+          </a>
+        </div>
+      </article>
+
+    </div>
+
+    <div class="empty-state" id="search-empty">
+      برنامه‌ای با این نام پیدا نشد.
+    </div>
+  </section>
+
+  <!-- دسته وب پنل‌ها -->
+  <section id="panels-category" style="display:none">
+
+    <div class="section-head">
+      <h2>وب پنل‌ها</h2>
+      <span class="counter">۰ پنل</span>
+    </div>
+
+    <div class="empty-state" style="display:block">
+      <span class="empty-icon">🌐</span>
+      <strong>پنلی وجود ندارد</strong>
+      <p>در حال حاضر هیچ وب پنلی در این دسته‌بندی ثبت نشده است.</p>
+    </div>
+
+  </section>
+
+</main>
+
+<!-- صفحه جزئیات -->
+<section id="details">
+
+  <div class="details-top">
+    <button class="back-btn" type="button" onclick="backToStore()">
+      <span class="back-arrow">›</span>
+      <span>بازگشت به استور</span>
+    </button>
+  </div>
+
+  <main class="details-container">
+
+    <div class="details-hero">
+      <div class="details-icon" id="details-icon"></div>
+
+      <div class="details-heading">
+        <h1 id="details-title">MLM VPN</h1>
+        <p id="details-subtitle">برنامه VPN</p>
+        <button class="update-btn" id="download-main" type="button">
+          دانلود
+        </button>
+      </div>
+    </div>
+
+    <div class="stats">
+      <div class="stat">
+        <div class="stat-label">نسخه</div>
+        <div class="stat-value" id="stat-version">—</div>
+      </div>
+
+      <div class="stat">
+        <div class="stat-label">آخرین نسخه</div>
+        <div class="stat-value" id="stat-latest">—</div>
+      </div>
+
+      <div class="stat">
+        <div class="stat-label">اندازه</div>
+        <div class="stat-value" id="stat-size">—</div>
+      </div>
+
+      <div class="stat">
+        <div class="stat-label">منبع</div>
+        <div class="stat-value" id="stat-source">گیت‌هاب</div>
+      </div>
+    </div>
+
+    <section class="detail-section">
+      <h2>درباره برنامه</h2>
+      <div class="about-box" id="details-about"></div>
+    </section>
+
+    <section class="detail-section">
+      <h2>اطلاعات برنامه</h2>
+
+      <div class="info-box">
+        <div class="info-row">
+          <span class="info-label">سازنده</span>
+          <span class="info-value" id="info-maker"></span>
+        </div>
+
+        <div class="info-row">
+          <span class="info-label">نسخه</span>
+          <span class="info-value" id="info-version"></span>
+        </div>
+
+        <div class="info-row">
+          <span class="info-label">مخزن پروژه</span>
+          <span class="info-value" id="info-repo"></span>
+        </div>
+      </div>
+    </section>
+
+    <a class="github-btn" id="github-btn"
+      href="#" target="_blank" rel="noopener noreferrer">
+      <svg viewBox="0 0 24 24" fill="none"
+        stroke="currentColor" stroke-width="2" aria-hidden="true">
+        <path d="M14 3h7v7"/>
+        <path d="M10 14 21 3"/>
+        <path d="M19 13v7a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1h7"/>
+      </svg>
+      <span>مشاهده پروژه در گیت‌هاب</span>
+    </a>
+
+    <!-- نسخه‌های MLM -->
+    <section class="detail-section" id="mlm-downloads"
+      style="margin-top:28px">
+
+      <h2>انتخاب نسخه برای دانلود</h2>
+
+      <div class="details-version-list">
+
+        <div class="details-version">
+          <div class="version-symbol">🚀</div>
+          <div class="version-info">
+            <div class="version-name">MLMVPN V8</div>
+            <div class="version-desc">ARM64 · گوشی‌های جدید</div>
+          </div>
+          <button class="download-btn"
+            onclick="downloadFile('V8')">دانلود ↓</button>
+        </div>
+
+        <div class="details-version">
+          <div class="version-symbol">📱</div>
+          <div class="version-info">
+            <div class="version-name">MLMVPN V7</div>
+            <div class="version-desc">ARM 32-bit · دستگاه‌های سازگار</div>
+          </div>
+          <button class="download-btn"
+            onclick="downloadFile('V7')">دانلود ↓</button>
+        </div>
+
+        <div class="details-version">
+          <div class="version-symbol">🌐</div>
+          <div class="version-info">
+            <div class="version-name">MLMVPN Universal</div>
+            <div class="version-desc">نسخه عمومی با سازگاری گسترده‌تر</div>
+          </div>
+          <button class="download-btn"
+            onclick="downloadFile('Universal')">دانلود ↓</button>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- نسخه‌های Nova -->
+    <section class="detail-section" id="nova-downloads"
+      style="display:none;margin-top:28px">
+
+      <h2>انتخاب نسخه Nova v1.30.2</h2>
+
+      <div class="details-version-list">
+
+        <div class="details-version">
+          <div class="version-symbol">🚀</div>
+          <div class="version-info">
+            <div class="version-name">Nova ARM64</div>
+            <div class="version-desc">ARM64 · بیشتر گوشی‌های جدید</div>
+          </div>
+          <button class="download-btn"
+            onclick="downloadNova('arm64')">دانلود ↓</button>
+        </div>
+
+        <div class="details-version">
+          <div class="version-symbol">📱</div>
+          <div class="version-info">
+            <div class="version-name">Nova ARM 32-bit</div>
+            <div class="version-desc">ARM 32-bit · دستگاه‌های سازگار</div>
+          </div>
+          <button class="download-btn"
+            onclick="downloadNova('arm32')">دانلود ↓</button>
+        </div>
+
+        <div class="details-version">
+          <div class="version-symbol">💻</div>
+          <div class="version-info">
+            <div class="version-name">Nova x86_64</div>
+            <div class="version-desc">x86_64 · دستگاه‌های سازگار</div>
+          </div>
+          <button class="download-btn"
+            onclick="downloadNova('x86')">دانلود ↓</button>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+</section>
+
+<footer id="store-footer">
+  SpaedrNG · فروشگاه برنامه‌ها
+</footer>
+
+<script>
+const apps = {
+  mlm: {
+    title: "MLM VPN",
+    subtitle: "برنامه VPN برای اندروید",
+    version: "1.2.40",
+    latest: "1.2.40",
+    size: "—",
+    source: "GitHub",
+    maker: "MLM VPN",
+    repo: "mlmvpn/mlmvpn_android",
+    url: "https://github.com/mlmvpn/mlmvpn_android",
+    releases: "https://github.com/mlmvpn/mlmvpn_android/releases#release-v1.2.40",
+    about: "نسخه مناسب دستگاه خود را از فهرست دانلود انتخاب کنید. سه نسخه ARM64، ARM 32-bit و Universal ارائه شده‌اند.",
+    icon: '<img src="https://raw.githubusercontent.com/mlmvpn/mlmvpn_android/main/app/src/main/res/mipmap-xxxhdpi/ic_launcher.webp" alt="MLM VPN">',
+    type: "mlm"
+  },
+
+  nova: {
+    title: "Nova Proxy",
+    subtitle: "Nova Client · برنامه پراکسی",
+    version: "1.30.2",
+    latest: "1.30.2",
+    size: "—",
+    source: "GitHub",
+    maker: "IRNova",
+    repo: "IRNova/Nova-Client",
+    url: "https://github.com/IRNova/Nova-Client",
+    releases: "https://github.com/IRNova/Nova-Client/releases/tag/v1.30.2",
+    about: "Nova Client نسخه 1.30.2. قبل از دانلود، نسخه سازگار با معماری پردازنده دستگاه خود را انتخاب کنید: ARM64، ARM 32-bit یا x86_64.",
+    icon: '<img src="https://raw.githubusercontent.com/IRNova/Nova-Proxy-App/main/logo.svg" alt="Nova Proxy" onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'grid\'"><span class="nova-fallback" style="display:none">N</span>',
+    type: "nova"
+  }
+};
+
+const downloadLinks = {
+  V8: "https://github.com/mlmvpn/mlmvpn_android/releases/download/v1.2.40/mlmvpn-1.2.40-arm64-v8a-release.apk",
+  V7: "https://github.com/mlmvpn/mlmvpn_android/releases/download/v1.2.40/mlmvpn-1.2.40-armeabi-v7a-release.apk",
+  Universal: "https://github.com/mlmvpn/mlmvpn_android/releases/download/v1.2.40/mlmvpn-1.2.40-universal-release.apk"
+};
+
+const novaDownloadLinks = {
+  arm64: "https://github.com/IRNova/Nova-Client/releases/download/v1.30.2/nova-client-arm64-v8a.apk",
+  arm32: "https://github.com/IRNova/Nova-Client/releases/download/v1.30.2/nova-client-armeabi-v7a.apk",
+  x86: "https://github.com/IRNova/Nova-Client/releases/download/v1.30.2/nova-client-x86_64.apk"
+};
+
+let currentCategory = "apps";
+let currentApp = null;
+
+const storeHeader = document.getElementById("store-header");
+const storePage = document.getElementById("store-page");
+const storeFooter = document.getElementById("store-footer");
+const detailsPage = document.getElementById("details");
+
+function selectCategory(category) {
+  currentCategory = category;
+
+  document.querySelectorAll(".category-tab").forEach(button => {
+    button.classList.toggle(
+      "active",
+      button.dataset.category === category
+    );
+  });
+
+  document.getElementById("apps-category").style.display =
+    category === "apps" ? "block" : "none";
+
+  document.getElementById("panels-category").style.display =
+    category === "panels" ? "block" : "none";
+
+  document.getElementById("search").value = "";
+
+  filterApps("");
+
+  window.scrollTo({top: 0, behavior: "smooth"});
+}
+
+document.querySelectorAll(".category-tab").forEach(button => {
+  button.addEventListener("click", () => {
+    selectCategory(button.dataset.category);
+  });
+});
+
+function openDetails(id, updateHistory = true) {
+  const app = apps[id];
+  if (!app) return;
+
+  currentApp = id;
+
+  storeHeader.style.display = "none";
+  storePage.style.display = "none";
+  storeFooter.style.display = "none";
+  detailsPage.style.display = "block";
+
+  document.getElementById("details-title").textContent = app.title;
+  document.getElementById("details-subtitle").textContent = app.subtitle;
+  document.getElementById("details-icon").innerHTML = app.icon;
+
+  document.getElementById("stat-version").textContent = app.version;
+  document.getElementById("stat-latest").textContent = app.latest;
+  document.getElementById("stat-size").textContent = app.size;
+  document.getElementById("stat-source").textContent = app.source;
+
+  document.getElementById("details-about").textContent = app.about;
+  document.getElementById("info-maker").textContent = app.maker;
+  document.getElementById("info-version").textContent = app.version;
+  document.getElementById("info-repo").textContent = app.repo;
+  document.getElementById("github-btn").href = app.url;
+
+  document.getElementById("mlm-downloads").style.display =
+    app.type === "mlm" ? "block" : "none";
+
+  document.getElementById("nova-downloads").style.display =
+    app.type === "nova" ? "block" : "none";
+
+  const mainDownload = document.getElementById("download-main");
+
+  mainDownload.textContent = "دانلود";
+
+  mainDownload.onclick = function() {
+    const section = document.getElementById(
+      app.type === "mlm" ? "mlm-downloads" : "nova-downloads"
+    );
+
+    section.scrollIntoView({
+      behavior: "smooth",
+      block: "start"
+    });
+  };
+
+  if (updateHistory) {
+    history.pushState(
+      {page: "details", app: id},
+      "",
+      "#app-" + id
+    );
+  }
+
+  window.scrollTo(0, 0);
+}
+
+function showStore() {
+  detailsPage.style.display = "none";
+  storeHeader.style.display = "";
+  storePage.style.display = "";
+  storeFooter.style.display = "";
+}
+
+function backToStore() {
+  showStore();
+
+  if (location.hash.startsWith("#app-")) {
+    history.pushState(
+      {page: "store"},
+      "",
+      location.pathname + location.search
+    );
+  }
+
+  window.scrollTo(0, 0);
+}
+
+window.addEventListener("popstate", function() {
+  if (location.hash.startsWith("#app-")) {
+    const id = location.hash.slice(5);
+
+    if (apps[id]) {
+      openDetails(id, false);
+      return;
+    }
+  }
+
+  showStore();
+});
+
+document.querySelectorAll(".app-card").forEach(card => {
+  card.addEventListener("click", event => {
+    if (event.target.closest("a,button")) return;
+    openDetails(card.dataset.app);
+  });
+});
+
+function startDownload(url, name) {
+  if (!url) {
+    alert("لینک دانلود پیدا نشد.");
+    return;
+  }
+
+  if (confirm("دانلود " + name + " را ادامه می‌دهید؟")) {
+    window.location.href = url;
+  }
+}
+
+function downloadFile(version) {
+  const url = downloadLinks[version];
+  startDownload(url, "MLM VPN " + version);
+}
+
+function downloadNova(version) {
+  const url = novaDownloadLinks[version];
+  startDownload(url, "Nova v1.30.2 (" + version + ")");
+}
+
+const search = document.getElementById("search");
+const cards = Array.from(document.querySelectorAll(".searchable"));
+const counter = document.getElementById("counter");
+const searchEmpty = document.getElementById("search-empty");
+
+function filterApps(query) {
+  let visible = 0;
+
+  cards.forEach(card => {
+    const content = (
+      card.innerText + " " + card.dataset.name
+    ).toLowerCase();
+
+    const match = content.includes(query.toLowerCase());
+
+    card.classList.toggle("hidden", !match);
+
+    if (match) visible++;
+  });
+
+  counter.textContent = visible + " برنامه";
+  searchEmpty.style.display = visible ? "none" : "block";
+}
+
+search.addEventListener("input", function() {
+  filterApps(this.value.trim());
+});
+
+if (location.hash.startsWith("#app-")) {
+  const id = location.hash.slice(5);
+
+  if (apps[id]) {
+    openDetails(id, false);
+  }
+}
+</script>
+
+</body>
+  </html>
