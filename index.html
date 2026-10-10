@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="fa" dir="rtl">
-<head>
+<html lang="fa" dir="rtl"><head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#120d0b">
 <title>SpaedrNG | App Store</title>
+
 <style>
-:root {
+:root{
   --bg:#120d0b;
   --surface:#211b19;
   --surface2:#2b2320;
@@ -15,217 +15,204 @@
   --muted:#aaa09b;
   --accent:#d8c7bf;
 }
-* { box-sizing:border-box; margin:0; padding:0; }
-body {
+*{box-sizing:border-box;margin:0;padding:0}
+body{
   min-height:100vh;
   font-family:Tahoma,Arial,sans-serif;
   background:radial-gradient(ellipse at 50% 0,#39231b 0%,#211510 38%,var(--bg) 85%);
-  color:var(--text);
+  color:var(--text)
 }
-button,input,a { font:inherit; }
-button,a { -webkit-tap-highlight-color:transparent; }
-a { color:inherit; text-decoration:none; }
-button { cursor:pointer; }
+button,input,a{font:inherit}
+button,a{-webkit-tap-highlight-color:transparent}
+a{color:inherit;text-decoration:none}
+button{cursor:pointer}
 
-.topbar {
-  position:sticky; top:0; z-index:10;
-  background:#160f0ddd; backdrop-filter:blur(18px);
-  border-bottom:1px solid #ffffff0d;
+.topbar{
+  position:sticky;top:0;z-index:10;
+  background:#160f0ddd;backdrop-filter:blur(18px);
+  border-bottom:1px solid #ffffff0d
 }
-.topbar-inner {
-  max-width:1000px; margin:auto; padding:14px 20px;
-  display:flex; align-items:center; gap:12px;
+.topbar-inner{
+  max-width:760px;margin:auto;padding:14px 16px;
+  display:flex;align-items:center;gap:12px
 }
-.brand-logo {
-  width:48px; height:48px; display:grid; place-items:center;
-  border-radius:16px;
+.brand-logo{
+  width:46px;height:46px;display:grid;place-items:center;
+  border-radius:15px;
   background:linear-gradient(145deg,#8d5542,#43271e);
-  font-size:25px; font-weight:900;
-  border:1px solid #ffffff20;
+  border:1px solid #ffffff20;font-size:24px;font-weight:900
 }
-.brand-name { font-size:21px; font-weight:900; }
-.brand-name span { color:#d6a18b; }
-.brand-subtitle { font-size:11px; color:var(--muted); margin-top:5px; }
+.brand-name{font-size:20px;font-weight:900}
+.brand-name span{color:#d6a18b}
+.brand-subtitle{font-size:11px;color:var(--muted);margin-top:5px}
+.container{max-width:760px;margin:auto;padding:22px 15px 42px}
+.search-wrap{position:relative;margin-bottom:24px}
+.search-symbol{
+  position:absolute;right:15px;top:50%;
+  transform:translateY(-50%);color:var(--muted);font-size:22px
+}
+#search{
+  width:100%;padding:15px 43px 15px 14px;
+  background:#241b18;border:1px solid var(--border);
+  border-radius:16px;color:white;outline:none;font-size:13px
+}
+#search:focus{border-color:#9b7666}
 
-.container { max-width:1000px; margin:auto; padding:22px 18px 42px; }
-.search-wrap { position:relative; margin-bottom:24px; }
-.search-symbol {
-  position:absolute; right:16px; top:50%;
-  transform:translateY(-50%); color:var(--muted); font-size:23px;
-}
-#search {
-  width:100%; padding:17px 48px 17px 15px;
-  background:#241b18; border:1px solid var(--border);
-  border-radius:18px; color:white; outline:none; font-size:13px;
-}
-#search:focus { border-color:#b58a77; }
-
-.category-row { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:28px; }
-.category-card {
-  display:flex; align-items:center; justify-content:center; gap:12px;
-  min-height:100px; border:1px solid var(--border); border-radius:22px;
+.category-row{display:grid;grid-template-columns:1fr 1fr;gap:11px;margin-bottom:27px}
+.category-card{
+  min-height:78px;display:flex;align-items:center;justify-content:center;gap:10px;
+  border:1px solid var(--border);border-radius:18px;
   background:linear-gradient(140deg,#2a211e,#1b1412);
-  color:#cfc4be; font-weight:bold; font-size:14px;
+  color:#cfc4be;font-weight:bold;font-size:13px
 }
-.category-card .emoji { font-size:29px; }
-.category-card.active {
+.category-card .emoji{font-size:24px}
+.category-card.active{
   background:linear-gradient(140deg,#624536,#3a251d);
-  border-color:#987665; color:#fff;
+  border-color:#987665;color:#fff
 }
-.section-head {
-  display:flex; align-items:center; justify-content:space-between;
-  margin-bottom:14px; gap:12px;
+.section-head{
+  display:flex;align-items:center;justify-content:space-between;
+  margin-bottom:14px;gap:10px
 }
-.section-head h2 { font-size:16px; }
-.counter {
-  font-size:11px; color:#e0bcae; background:#39251e;
-  padding:8px 11px; border-radius:10px;
+.section-head h2{font-size:16px}
+.counter{
+  font-size:11px;color:#e0bcae;background:#39251e;
+  padding:7px 10px;border-radius:9px
 }
 
-/* کارت‌های افقی */
-.app-list {
-  display:grid;
-  grid-template-columns:repeat(2,minmax(0,1fr));
-  gap:14px;
-}
-.app-card {
-  min-width:0;
+/* همه کارت‌ها عمودی و زیر هم */
+.app-list{display:flex;flex-direction:column;gap:13px}
+.app-card{
+  width:100%;min-width:0;
   background:linear-gradient(145deg,#28201d,#191311);
-  border:1px solid var(--border); border-radius:23px; padding:17px;
-  transition:border-color .2s,transform .2s;
-  cursor:pointer;
+  border:1px solid var(--border);border-radius:21px;padding:16px;
+  transition:border-color .2s,transform .2s;cursor:pointer
 }
-.app-card:hover { border-color:#8a695b; transform:translateY(-2px); }
-.app-head { display:flex; align-items:center; gap:13px; }
-.app-icon-link {
-  width:76px; height:76px; flex-shrink:0; border-radius:20px;
-  overflow:hidden; background:#171615;
-  border:1px solid #ffffff17; display:grid; place-items:center;
+.app-card:hover{border-color:#8a695b}
+.app-head{display:flex;align-items:center;gap:13px}
+.app-icon-link{
+  width:72px;height:72px;flex-shrink:0;border-radius:19px;
+  overflow:hidden;background:#171615;border:1px solid #ffffff17;
+  display:grid;place-items:center
 }
-.app-icon { width:100%; height:100%; object-fit:cover; }
-.app-fallback {
-  width:100%; height:100%; display:grid; place-items:center;
+.app-icon{width:100%;height:100%;object-fit:cover}
+.app-fallback{
+  width:100%;height:100%;display:grid;place-items:center;
   background:linear-gradient(145deg,#28334a,#111a2a);
-  color:#d4e1ff; font-size:30px; font-weight:900;
+  color:#d4e1ff;font-size:29px;font-weight:900
 }
-.app-meta { min-width:0; flex:1; }
-.app-title { font-size:18px; font-weight:900; margin-bottom:7px; overflow-wrap:anywhere; }
-.app-subtitle { color:var(--muted); font-size:11px; line-height:1.8; }
-.app-badge {
-  display:inline-block; margin-top:7px; padding:6px 9px;
-  border-radius:20px; background:#392923; color:#dfb6a3; font-size:10px;
+.app-meta{min-width:0;flex:1}
+.app-title{font-size:18px;font-weight:900;margin-bottom:7px;overflow-wrap:anywhere}
+.app-subtitle{color:var(--muted);font-size:11px;line-height:1.9}
+.app-badge{
+  display:inline-block;margin-top:7px;padding:5px 9px;
+  border-radius:20px;background:#392923;color:#dfb6a3;font-size:10px
 }
-.app-description { color:#c3b9b4; font-size:12px; line-height:2; margin:15px 0; }
-.primary-actions { display:grid; grid-template-columns:1fr 1fr; gap:9px; }
-.action-btn {
-  min-height:43px; padding:11px 8px; display:flex; align-items:center;
-  justify-content:center; gap:7px; border-radius:13px; text-align:center;
-  font-size:11px; font-weight:bold; border:1px solid #ffffff1a;
+.app-description{color:#c3b9b4;font-size:12px;line-height:2;margin:14px 0}
+.primary-actions{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.action-btn{
+  min-height:43px;padding:11px 8px;display:flex;align-items:center;
+  justify-content:center;gap:7px;border-radius:13px;text-align:center;
+  font-size:11px;font-weight:bold;border:1px solid #ffffff1a
 }
-.action-primary { background:#594034; color:#fff; }
-.action-dark { background:#28211e; color:#eee; }
-.empty-state,.web-empty {
-  display:none; text-align:center; color:var(--muted);
-  padding:30px 20px; border:1px dashed var(--border); border-radius:20px;
-  line-height:2;
+.action-primary{background:#594034;color:#fff}
+.action-dark{background:#28211e;color:#eee}
+.action-btn:active,.category-card:active{transform:scale(.98)}
+.empty-state{
+  display:none;text-align:center;color:var(--muted);
+  padding:28px;font-size:13px;line-height:2
 }
 
 /* صفحه جزئیات */
-#details { display:none; min-height:100vh; }
-.details-top {
-  max-width:760px; margin:auto; padding:20px 17px 8px;
-  display:flex; align-items:center;
+#details{display:none;min-height:100vh}
+.details-top{
+  max-width:760px;margin:auto;padding:22px 17px 10px;
+  display:flex;align-items:center
 }
-.back-btn {
-  border:0; background:transparent; color:#f4eeeb;
-  display:flex; align-items:center; gap:9px; font-size:17px; padding:8px 0;
+.back-btn{
+  border:0;background:transparent;color:#f4eeeb;
+  display:flex;align-items:center;gap:9px;font-size:17px;padding:8px 0
 }
-.back-arrow { font-size:29px; line-height:1; }
-.details-container { max-width:760px; margin:auto; padding:12px 17px 38px; }
-.details-hero { display:flex; align-items:center; gap:18px; margin:15px 4px 29px; }
-.details-icon {
-  width:126px; height:126px; flex-shrink:0; border-radius:28px;
-  overflow:hidden; background:#171514; border:1px solid #ffffff13;
-  display:grid; place-items:center;
+.back-arrow{font-size:30px;line-height:1}
+.details-container{max-width:760px;margin:auto;padding:12px 15px 38px}
+.details-hero{display:flex;align-items:center;gap:16px;margin:15px 4px 28px}
+.details-icon{
+  width:116px;height:116px;flex-shrink:0;border-radius:26px;
+  overflow:hidden;background:#171514;border:1px solid #ffffff13;
+  display:grid;place-items:center
 }
-.details-icon img { width:100%; height:100%; object-fit:cover; }
-.details-heading { flex:1; min-width:0; }
-.details-heading h1 { font-size:27px; line-height:1.5; overflow-wrap:anywhere; }
-.details-heading p { font-size:13px; color:var(--muted); margin:7px 0 14px; line-height:1.8; }
-.update-btn {
-  display:inline-flex; justify-content:center; align-items:center;
-  min-width:112px; padding:11px 22px; border:0; border-radius:30px;
-  background:#40312c; color:#eee1da; font-weight:bold;
+.details-icon img{width:100%;height:100%;object-fit:cover}
+.details-heading{flex:1;min-width:0}
+.details-heading h1{font-size:25px;line-height:1.5;overflow-wrap:anywhere}
+.details-heading p{font-size:12px;color:var(--muted);margin:7px 0 13px;line-height:1.8}
+.update-btn{
+  display:inline-flex;justify-content:center;align-items:center;
+  min-width:108px;padding:11px 20px;border:0;border-radius:30px;
+  background:#40312c;color:#eee1da;font-weight:bold
 }
-.stats {
-  display:grid; grid-template-columns:repeat(4,minmax(0,1fr));
-  border:1px solid var(--border); border-radius:23px;
-  background:#29211eaa; padding:18px 7px; margin-bottom:36px;
+.stats{
+  display:grid;grid-template-columns:repeat(4,minmax(0,1fr));
+  border:1px solid var(--border);border-radius:22px;
+  background:#29211eaa;padding:17px 5px;margin-bottom:33px
 }
-.stat { text-align:center; min-width:0; }
-.stat-label { font-size:11px; color:#c3b7b1; margin-bottom:12px; }
-.stat-value { font-size:14px; font-weight:bold; overflow-wrap:anywhere; }
-.detail-section { margin-bottom:32px; }
-.detail-section h2 { font-size:14px; font-weight:500; color:#b8aaa3; margin-bottom:14px; }
-.about-box,.info-box {
-  border:1px solid var(--border); border-radius:22px;
-  background:#28211eaa; overflow:hidden;
+.stat{text-align:center;min-width:0}
+.stat-label{font-size:10px;color:#c3b7b1;margin-bottom:11px}
+.stat-value{font-size:13px;font-weight:bold;overflow-wrap:anywhere}
+.detail-section{margin-bottom:30px}
+.detail-section h2{font-size:14px;font-weight:500;color:#b8aaa3;margin-bottom:14px}
+.about-box,.info-box{
+  border:1px solid var(--border);border-radius:21px;
+  background:#28211eaa;overflow:hidden
 }
-.about-box { padding:22px 19px; font-size:14px; line-height:2.2; color:#eee6e2; }
-.info-row {
-  display:flex; align-items:center; justify-content:space-between;
-  gap:12px; padding:16px 17px; border-bottom:1px solid #ffffff13; font-size:13px;
+.about-box{padding:21px 17px;font-size:13px;line-height:2.2;color:#eee6e2}
+.info-row{
+  display:flex;align-items:center;justify-content:space-between;gap:12px;
+  padding:15px 16px;border-bottom:1px solid #ffffff13;font-size:12px
 }
-.info-row:last-child { border-bottom:0; }
-.info-label { color:#b5aaa5; flex-shrink:0; }
-.info-value { text-align:left; direction:ltr; overflow-wrap:anywhere; }
-.github-btn {
-  display:flex; align-items:center; justify-content:center; gap:12px;
-  min-height:60px; padding:14px; border:1px solid var(--border);
-  border-radius:30px; background:#28211e; color:#fff; font-size:15px; font-weight:bold;
+.info-row:last-child{border-bottom:0}
+.info-label{color:#b5aaa5;flex-shrink:0}
+.info-value{text-align:left;direction:ltr;overflow-wrap:anywhere}
+.github-btn{
+  display:flex;align-items:center;justify-content:center;gap:10px;
+  min-height:59px;padding:14px;border:1px solid var(--border);
+  border-radius:28px;background:#28211e;color:#fff;font-size:14px;font-weight:bold
 }
-.details-version-list { margin-top:14px; display:grid; gap:10px; }
-.details-version {
-  display:flex; align-items:center; gap:12px; padding:13px;
-  border:1px solid var(--border); border-radius:15px; background:#241c19;
+.details-version-list{display:flex;flex-direction:column;gap:10px;margin-top:14px}
+.details-version{
+  display:flex;align-items:center;gap:11px;padding:12px;
+  border:1px solid var(--border);border-radius:15px;background:#241c19
 }
-.version-symbol {
-  width:40px; height:40px; display:grid; place-items:center;
-  border-radius:12px; background:#342721; flex-shrink:0;
+.version-symbol{
+  width:39px;height:39px;display:grid;place-items:center;
+  border-radius:12px;background:#342721;flex-shrink:0
 }
-.version-info { flex:1; min-width:0; }
-.version-name { font-size:12px; font-weight:bold; margin-bottom:5px; }
-.version-desc { font-size:10px; color:var(--muted); line-height:1.8; }
-.download-btn {
-  padding:10px 13px; border:0; border-radius:10px;
-  background:#694737; color:white; font-size:11px; font-weight:bold; white-space:nowrap;
+.version-info{flex:1;min-width:0}
+.version-name{font-size:12px;font-weight:bold;margin-bottom:5px}
+.version-desc{font-size:10px;color:var(--muted);line-height:1.8}
+.download-btn{
+  padding:10px 12px;border:0;border-radius:10px;
+  background:#694737;color:white;font-size:11px;font-weight:bold;white-space:nowrap
 }
-.app-note {
-  margin-top:13px; padding:12px; background:#201916;
-  border:1px solid var(--border); border-radius:12px;
-  color:var(--muted); font-size:10px; line-height:2;
+.app-note{
+  margin-top:13px;padding:12px;background:#201916;
+  border:1px solid var(--border);border-radius:12px;
+  color:var(--muted);font-size:10px;line-height:2
 }
-footer { max-width:1000px; margin:auto; padding:0 18px 28px; text-align:center; color:#8e817a; font-size:10px; line-height:2; }
-
-@media(max-width:650px) {
-  .container { padding:19px 12px 32px; }
-  .topbar-inner { padding:13px 15px; }
-  .app-list { grid-template-columns:1fr; gap:12px; }
-  .app-card { padding:15px; }
-  .app-icon-link { width:72px; height:72px; border-radius:18px; }
-  .details-container { padding:12px 15px 32px; }
-  .details-hero { gap:13px; margin:13px 0 26px; }
-  .details-icon { width:104px; height:104px; border-radius:23px; }
-  .details-heading h1 { font-size:23px; }
-  .stats { padding:16px 4px; border-radius:20px; }
-  .stat-label { font-size:9px; margin-bottom:10px; }
-  .stat-value { font-size:12px; }
-  .about-box { padding:19px 15px; font-size:13px; }
-  .info-row { padding:15px 13px; font-size:12px; }
+footer{
+  max-width:760px;margin:auto;padding:0 15px 28px;
+  text-align:center;color:#8e817a;font-size:10px;line-height:2
 }
-@media(min-width:651px) {
-  .details-version-list { grid-template-columns:1fr 1fr; }
-  .details-version:last-child:nth-child(odd) { grid-column:1/-1; }
+@media(max-width:390px){
+  .app-card{padding:13px}
+  .app-icon-link{width:63px;height:63px;border-radius:16px}
+  .app-title{font-size:16px}
+  .details-hero{gap:12px}
+  .details-icon{width:91px;height:91px;border-radius:21px}
+  .details-heading h1{font-size:21px}
+  .stats{padding:15px 3px}
+  .stat-label{font-size:9px}
+  .stat-value{font-size:11px}
+  .download-btn{padding:9px;font-size:10px}
 }
 </style>
 </head>
@@ -244,25 +231,26 @@ footer { max-width:1000px; margin:auto; padding:0 18px 28px; text-align:center; 
 <main class="container" id="store-page">
   <div class="search-wrap">
     <span class="search-symbol">⌕</span>
-    <input id="search" type="search" placeholder="جستجوی برنامه..." autocomplete="off">
+    <input id="search" type="search" placeholder="جستجوی برنامه..." autocomplete="off" aria-label="جستجو">
   </div>
 
   <div class="category-row">
-    <button class="category-card active" id="apps-category" onclick="showCategory('apps')">
+    <button class="category-card active" id="apps-category" type="button" onclick="showCategory('apps')">
       <span class="emoji">📱</span><span>برنامه‌ها</span>
     </button>
-    <button class="category-card" id="web-category" onclick="showCategory('web')">
+    <button class="category-card" id="web-category" type="button" onclick="showCategory('web')">
       <span class="emoji">🌐</span><span>وب پنل‌ها</span>
     </button>
   </div>
 
-  <div id="apps-view">
+  <section id="apps-view">
     <div class="section-head">
       <h2>برنامه‌های اندروید</h2>
       <span class="counter" id="counter">۳ برنامه</span>
     </div>
 
-    <div class="app-list">
+    <div class="app-list" id="app-list">
+
       <article class="app-card searchable" data-app="mlm" data-name="mlm vpn mlmvpn وی پی ان">
         <div class="app-head">
           <div class="app-icon-link">
@@ -274,132 +262,286 @@ footer { max-width:1000px; margin:auto; padding:0 18px 28px; text-align:center; 
             <span class="app-badge">نسخه 1.2.40</span>
           </div>
         </div>
-        <p class="app-description">کلاینت VPN برای اندروید؛ نسخه مناسب دستگاهت رو از بخش جزئیات انتخاب کن.</p>
+        <p class="app-description">نسخه مناسب دستگاه خود را انتخاب کنید. جزئیات و لینک‌های دانلود در صفحه برنامه موجود است.</p>
         <div class="primary-actions">
-          <button class="action-btn action-dark" onclick="openDetails('mlm')">ⓘ جزئیات برنامه</button>
-          <a class="action-btn action-primary" href="https://github.com/mlmvpn/mlmvpn_android/releases/tag/v1.2.40" target="_blank" rel="noopener">↗ صفحه دانلود</a>
+          <button class="action-btn action-dark" type="button" onclick="openDetails('mlm')">ⓘ جزئیات برنامه</button>
+          <a class="action-btn action-primary" href="https://github.com/mlmvpn/mlmvpn_android/releases/tag/v1.2.40" target="_blank" rel="noopener noreferrer">↗ صفحه دانلود</a>
         </div>
       </article>
 
       <article class="app-card searchable" data-app="nova" data-name="nova proxy nova client نوا پراکسی">
         <div class="app-head">
-          <div class="app-icon-link">
-            <span class="app-fallback">N</span>
-          </div>
+          <div class="app-icon-link"><span class="app-fallback">N</span></div>
           <div class="app-meta">
-            <h3 class="app-title">Nova Proxy</h3>
-            <p class="app-subtitle">ابزار پراکسی از پروژه IRNova</p>
+            <h3 class="app-title">Nova Client</h3>
+            <p class="app-subtitle">کلاینت پراکسی اندروید</p>
             <span class="app-badge">نسخه 1.30.2</span>
           </div>
         </div>
-        <p class="app-description">کلاینت پراکسی اندروید؛ جزئیات پروژه و نسخه‌های قابل دریافت را مشاهده کن.</p>
+        <p class="app-description">مشاهده اطلاعات پروژه و دریافت فایل مناسب معماری گوشی از بخش جزئیات.</p>
         <div class="primary-actions">
-          <button class="action-btn action-dark" onclick="openDetails('nova')">ⓘ جزئیات برنامه</button>
-          <a class="action-btn action-primary" href="https://github.com/IRNova/Nova-Client/releases/tag/v1.30.2" target="_blank" rel="noopener">↗ صفحه دانلود</a>
+          <button class="action-btn action-dark" type="button" onclick="openDetails('nova')">ⓘ جزئیات برنامه</button>
+          <a class="action-btn action-primary" href="https://github.com/IRNova/Nova-Client/releases/tag/v1.30.2" target="_blank" rel="noopener noreferrer">↗ صفحه دانلود</a>
         </div>
       </article>
 
       <article class="app-card searchable" data-app="aethon" data-name="aethon vpn aethergui آتون وی پی ان">
         <div class="app-head">
-          <div class="app-icon-link">
-            <span class="app-fallback" style="background:linear-gradient(145deg,#26324a,#11131b)">A</span>
-          </div>
+          <div class="app-icon-link"><span class="app-fallback" style="background:linear-gradient(145deg,#26324a,#11131b)">A</span></div>
           <div class="app-meta">
             <h3 class="app-title">Aethon VPN</h3>
             <p class="app-subtitle">کلاینت VPN برای اندروید</p>
             <span class="app-badge">نسخه 2.2.0</span>
           </div>
         </div>
-        <p class="app-description">سه فایل APK برای معماری‌های مختلف اندروید؛ نسخه مناسب گوشی‌ات را انتخاب کن.</p>
+        <p class="app-description">سه فایل APK برای معماری‌های مختلف اندروید؛ نسخه مناسب دستگاه خود را انتخاب کنید.</p>
         <div class="primary-actions">
-          <button class="action-btn action-dark" onclick="openDetails('aethon')">ⓘ جزئیات برنامه</button>
-          <a class="action-btn action-primary" href="https://github.com/hamvex/AetherGUI/releases/tag/v2.2.0" target="_blank" rel="noopener">↗ صفحه دانلود</a>
+          <button class="action-btn action-dark" type="button" onclick="openDetails('aethon')">ⓘ جزئیات برنامه</button>
+          <a class="action-btn action-primary" href="https://github.com/hamvex/AetherGUI/releases/tag/v2.2.0" target="_blank" rel="noopener noreferrer">↗ صفحه دانلود</a>
         </div>
       </article>
+
     </div>
     <div class="empty-state" id="empty-state">برنامه‌ای با این نام پیدا نشد.</div>
+  </section>
+
+  <section id="web-view" style="display:none">
+    <div class="section-head">
+      <h2>وب پنل‌ها</h2>
+      <span class="counter">۱ پنل</span>
+    </div>
+
+    <div class="app-list" id="web-list">
+      <article class="app-card searchable-web" data-name="اسپایدر پنل spider panel relay cloudflare کلودفلر">
+        <div class="app-head">
+          <div class="app-icon-link" style="background:linear-gradient(145deg,#633d30,#211512)">
+            <span style="font-size:35px">🕷️</span>
+          </div>
+          <div class="app-meta">
+            <h3 class="app-title">اسپایدر پنل</h3>
+            <p class="app-subtitle">پنل مدیریت و ابزارهای Cloudflare</p>
+            <span class="app-badge">Deploy: Relay + Cloudflare</span>
+          </div>
+        </div>
+
+        <p class="app-description">
+          دسترسی به مخزن رسمی پروژه، کانال تلگرام اسپایدر و آموزش نصب و راه‌اندازی پنل.
+        </p>
+
+        <div class="primary-actions">
+          <a class="action-btn action-dark" href="https://github.com/amirh00sain/spiderpanel" target="_blank" rel="noopener noreferrer">↗ پروژه گیت‌هاب</a>
+          <a class="action-btn action-primary" href="https://t.me/spider_vpn1" target="_blank" rel="noopener noreferrer">✈ کانال تلگرام</a>
+          <a class="action-btn action-dark" style="grid-column:1/-1" href="https://youtu.be/zBw9KAAip0I" target="_blank" rel="noopener noreferrer">▶ آموزش نصب و راه‌اندازی · Aimodix</a>
+        </div>
+      </article>
+    
+<div class="app-card" style="display:flex;gap:12px;align-items:center;
+     background:#14161d;color:#f5f5f5;border:1px solid #292d38;
+     border-radius:15px;padding:14px;margin:10px 0;
+     font-family:Tahoma,Arial,sans-serif">
+
+  <div class="app-icon" style="width:54px;height:54px;flex-shrink:0;
+       border-radius:14px;background:linear-gradient(135deg,#4b3021,#211711);
+       display:grid;place-items:center;font-size:24px;
+       color:#f7c69c;font-weight:bold">
+    💦
   </div>
 
-  <div class="web-empty" id="web-empty">
-    🌐<br><strong>هنوز وب‌پنلی اضافه نشده است</strong>
+  <div class="app-info" style="flex:1;min-width:0">
+    <h3 style="margin:0 0 3px;font-size:15px;color:#f5f5f5">
+      BPB
+    </h3>
+
+    <p style="margin:0;color:#9ca3af;font-size:12px">
+      وب‌پنل
+    </p>
+
+    <div class="buttons" style="display:flex;gap:3px;flex-wrap:wrap;margin-top:8px">
+      
+    <a href="https://wizard.bpb-panel.workers.dev/" target="_blank" rel="noopener noreferrer" style="display:inline-block;margin:4px;padding:7px 10px;
+       border-radius:8px;background:#30231a;color:#ffffff;
+       text-decoration:none;font-size:12px">
+       گیت‌هاب
+    </a>
+    </div>
+
+    
   </div>
+</div>
+<div class="app-card" style="display:flex;gap:12px;align-items:center;
+     background:#14161d;color:#f5f5f5;border:1px solid #292d38;
+     border-radius:15px;padding:14px;margin:10px 0;
+     font-family:Tahoma,Arial,sans-serif">
+
+  <div class="app-icon" style="width:54px;height:54px;flex-shrink:0;
+       border-radius:14px;background:linear-gradient(135deg,#4b3021,#211711);
+       display:grid;place-items:center;font-size:24px;
+       color:#f7c69c;font-weight:bold">
+    N
+  </div>
+
+  <div class="app-info" style="flex:1;min-width:0">
+    <h3 style="margin:0 0 3px;font-size:15px;color:#f5f5f5">
+      Netra
+    </h3>
+
+    <p style="margin:0;color:#9ca3af;font-size:12px">
+      وب‌پنل
+    </p>
+
+    <div class="buttons" style="display:flex;gap:3px;flex-wrap:wrap;margin-top:8px">
+      
+    <a href="http://github.com/netrair" target="_blank" rel="noopener noreferrer" style="display:inline-block;margin:4px;padding:7px 10px;
+       border-radius:8px;background:#30231a;color:#ffffff;
+       text-decoration:none;font-size:12px">
+       گیت‌هاب
+    </a>
+    <a href="https://t.me/NetraIR" target="_blank" rel="noopener noreferrer" style="display:inline-block;margin:4px;padding:7px 10px;
+       border-radius:8px;background:#30231a;color:#ffffff;
+       text-decoration:none;font-size:12px">
+       تلگرام
+    </a>
+    </div>
+
+    
+  </div>
+</div>
+<div class="app-card" style="display:flex;gap:12px;align-items:center;
+     background:#14161d;color:#f5f5f5;border:1px solid #292d38;
+     border-radius:15px;padding:14px;margin:10px 0;
+     font-family:Tahoma,Arial,sans-serif">
+
+  <div class="app-icon" style="width:54px;height:54px;flex-shrink:0;
+       border-radius:14px;background:linear-gradient(135deg,#4b3021,#211711);
+       display:grid;place-items:center;font-size:24px;
+       color:#f7c69c;font-weight:bold">
+    ⬜️
+  </div>
+
+  <div class="app-info" style="flex:1;min-width:0">
+    <h3 style="margin:0 0 3px;font-size:15px;color:#f5f5f5">
+      پارس اسپیس
+    </h3>
+
+    <p style="margin:0;color:#9ca3af;font-size:12px">
+      وب‌پنل
+    </p>
+
+    <div class="buttons" style="display:flex;gap:3px;flex-wrap:wrap;margin-top:8px">
+      
+    <a href="https://github.com/PSP-Support/ParsSpace" target="_blank" rel="noopener noreferrer" style="display:inline-block;margin:4px;padding:7px 10px;
+       border-radius:8px;background:#30231a;color:#ffffff;
+       text-decoration:none;font-size:12px">
+       گیت‌هاب
+    </a>
+    <a href="https://t.me/ParsSpace_channel" target="_blank" rel="noopener noreferrer" style="display:inline-block;margin:4px;padding:7px 10px;
+       border-radius:8px;background:#30231a;color:#ffffff;
+       text-decoration:none;font-size:12px">
+       تلگرام
+    </a>
+    </div>
+
+    
+  </div>
+</div></div>
+
+    <div class="empty-state" id="web-empty">وب‌پنلی با این نام پیدا نشد.</div>
+  </section>
 </main>
 
 <section id="details">
   <div class="details-top">
-    <button class="back-btn" onclick="backToStore()"><span class="back-arrow">›</span><span>استور</span></button>
+    <button class="back-btn" type="button" onclick="backToStore()">
+      <span class="back-arrow">›</span><span>استور</span>
+    </button>
   </div>
+
   <main class="details-container">
     <div class="details-hero">
       <div class="details-icon" id="details-icon"></div>
       <div class="details-heading">
         <h1 id="details-title"></h1>
         <p id="details-subtitle"></p>
-        <button class="update-btn" id="update-btn">بروز</button>
+        <button class="update-btn" id="update-btn" type="button">مشاهده نسخه</button>
       </div>
     </div>
+
     <div class="stats">
       <div class="stat"><div class="stat-label">نسخه</div><div class="stat-value" id="stat-version"></div></div>
       <div class="stat"><div class="stat-label">تازه‌ترین</div><div class="stat-value" id="stat-latest"></div></div>
       <div class="stat"><div class="stat-label">اندازه</div><div class="stat-value">—</div></div>
-      <div class="stat"><div class="stat-label">منبع</div><div class="stat-value">گیت‌هاب</div></div>
+      <div class="stat"><div class="stat-label">منبع</div><div class="stat-value">GitHub</div></div>
     </div>
+
     <section class="detail-section">
-      <h2>درباره</h2><div class="about-box" id="details-about"></div>
+      <h2>درباره</h2>
+      <div class="about-box" id="details-about"></div>
     </section>
+
     <section class="detail-section">
-      <h2>اطلاعات</h2>
+      <h2>اطلاعات برنامه</h2>
       <div class="info-box">
         <div class="info-row"><span class="info-label">سازنده</span><span class="info-value" id="info-maker"></span></div>
-        <div class="info-row"><span class="info-label">نسخه</span><span class="info-value" id="info-version"></span></div>
-        <div class="info-row"><span class="info-label">منبع</span><span class="info-value" id="info-repo"></span></div>
+        <div class="info-row"><span class="info-label">نسخه نصب</span><span class="info-value" id="info-version"></span></div>
+        <div class="info-row"><span class="info-label">مخزن</span><span class="info-value" id="info-repo"></span></div>
       </div>
     </section>
-    <a class="github-btn" id="github-btn" href="#" target="_blank" rel="noopener">↗ مشاهده در گیت‌هاب</a>
+
+    <a class="github-btn" id="github-btn" href="#" target="_blank" rel="noopener noreferrer">↗ مشاهده در گیت‌هاب</a>
+
     <section class="detail-section" style="margin-top:28px">
       <h2>انتخاب نسخه برای دانلود</h2>
       <div class="details-version-list" id="details-version-list"></div>
-      <div class="app-note">نسخه ARM64 برای بسیاری از گوشی‌های جدید مناسب است. اگر معماری دستگاهت را نمی‌دانی، نسخه Universal را در صورت موجود بودن انتخاب کن.</div>
+      <div class="app-note">نسخه ARM64 برای بسیاری از گوشی‌های جدید مناسب است. اگر معماری دستگاه خود را نمی‌دانید، در صورت موجود بودن نسخه Universal را انتخاب کنید.</div>
     </section>
   </main>
 </section>
 
-<footer id="store-footer">SpaedrNG · فروشگاه برنامه‌ها</footer>
+<footer id="store-footer">SpaedrNG · فروشگاه برنامه‌ها و وب پنل‌ها</footer>
 
 <script>
 const apps = {
-  mlm: {
-    title:"MLM VPN", subtitle:"خود برنامه", version:"1.2.40",
-    maker:"MLM VPN", repo:"mlmvpn/mlmvpn_android",
+  mlm:{
+    title:"MLM VPN",
+    subtitle:"برنامه VPN برای اندروید",
+    version:"1.2.40",
+    maker:"MLM VPN",
+    repo:"mlmvpn/mlmvpn_android",
     url:"https://github.com/mlmvpn/mlmvpn_android",
     releases:"https://github.com/mlmvpn/mlmvpn_android/releases/tag/v1.2.40",
-    about:"نسخه 1.2.40 برنامه MLM VPN. بسته مناسب معماری گوشی را از فهرست دانلود انتخاب کن.",
+    about:"نسخه 1.2.40 برنامه MLM VPN. فایل مناسب معماری دستگاه خود را از فهرست زیر انتخاب کنید.",
     icon:'<img src="https://raw.githubusercontent.com/mlmvpn/mlmvpn_android/main/app/src/main/res/mipmap-xxxhdpi/ic_launcher.webp" alt="MLM VPN">',
     downloads:[
-      {name:"ARM64",desc:"گوشی‌های جدید",symbol:"🚀",url:"https://github.com/mlmvpn/mlmvpn_android/releases/download/v1.2.40/mlmvpn-1.2.40-arm64-v8a-release.apk"},
+      {name:"ARM64",desc:"گوشی‌های جدید · arm64-v8a",symbol:"🚀",url:"https://github.com/mlmvpn/mlmvpn_android/releases/download/v1.2.40/mlmvpn-1.2.40-arm64-v8a-release.apk"},
       {name:"ARM 32-bit",desc:"دستگاه‌های ۳۲ بیتی",symbol:"📱",url:"https://github.com/mlmvpn/mlmvpn_android/releases/download/v1.2.40/mlmvpn-1.2.40-armeabi-v7a-release.apk"},
-      {name:"Universal",desc:"نسخه عمومی",symbol:"🌐",url:"https://github.com/mlmvpn/mlmvpn_android/releases/download/v1.2.40/mlmvpn-1.2.40-universal-release.apk"}
+      {name:"Universal",desc:"نسخه عمومی اندروید",symbol:"🌐",url:"https://github.com/mlmvpn/mlmvpn_android/releases/download/v1.2.40/mlmvpn-1.2.40-universal-release.apk"}
     ]
   },
-  nova: {
-    title:"Nova Proxy", subtitle:"ابزار پراکسی", version:"1.30.2",
-    maker:"IRNova", repo:"IRNova/Nova-Client",
+  nova:{
+    title:"Nova Client",
+    subtitle:"کلاینت پراکسی اندروید",
+    version:"1.30.2",
+    maker:"IRNova",
+    repo:"IRNova/Nova-Client",
     url:"https://github.com/IRNova/Nova-Client",
     releases:"https://github.com/IRNova/Nova-Client/releases/tag/v1.30.2",
-    about:"Nova Client پروژه‌ای برای اندروید است. نسخه 1.30.2 را بر اساس معماری گوشی انتخاب کن.",
+    about:"Nova Client پروژه‌ای برای اندروید است. فایل APK مناسب معماری دستگاه خود را انتخاب کنید.",
     icon:'<span class="app-fallback">N</span>',
     downloads:[
-      {name:"ARM64",desc:"گوشی‌های جدید",symbol:"🚀",url:"https://github.com/IRNova/Nova-Client/releases/download/v1.30.2/nova-client-arm64-v8a.apk"},
+      {name:"ARM64",desc:"گوشی‌های جدید · arm64-v8a",symbol:"🚀",url:"https://github.com/IRNova/Nova-Client/releases/download/v1.30.2/nova-client-arm64-v8a.apk"},
       {name:"ARM 32-bit",desc:"دستگاه‌های ۳۲ بیتی",symbol:"📱",url:"https://github.com/IRNova/Nova-Client/releases/download/v1.30.2/nova-client-armeabi-v7a.apk"},
       {name:"x86_64",desc:"دستگاه‌های مبتنی بر x86_64",symbol:"💻",url:"https://github.com/IRNova/Nova-Client/releases/download/v1.30.2/nova-client-x86_64.apk"}
     ]
   },
-  aethon: {
-    title:"Aethon VPN", subtitle:"کلاینت VPN برای اندروید", version:"2.2.0",
-    maker:"AetherGUI", repo:"hamvex/AetherGUI",
+  aethon:{
+    title:"Aethon VPN",
+    subtitle:"کلاینت VPN برای اندروید",
+    version:"2.2.0",
+    maker:"AetherGUI",
+    repo:"hamvex/AetherGUI",
     url:"https://github.com/hamvex/AetherGUI",
     releases:"https://github.com/hamvex/AetherGUI/releases/tag/v2.2.0",
-    about:"نسخه 2.2.0 برنامه Aethon VPN. سه فایل APK برای معماری‌های مختلف اندروید ارائه شده است.",
+    about:"نسخه 2.2.0 برنامه Aethon VPN. سه فایل APK برای معماری‌های مختلف اندروید در دسترس است.",
     icon:'<span class="app-fallback" style="background:linear-gradient(145deg,#26324a,#11131b)">A</span>',
     downloads:[
       {name:"ARM64",desc:"Android arm64-v8a · گوشی‌های جدید",symbol:"🚀",url:"https://github.com/hamvex/AetherGUI/releases/download/v2.2.0/Aethon-VPN-v2.2.0-Android-arm64-v8a.apk"},
@@ -410,21 +552,31 @@ const apps = {
 };
 
 let currentCategory="apps";
-function showCategory(category) {
+
+function showCategory(category){
   currentCategory=category;
+
   document.getElementById("apps-category").classList.toggle("active",category==="apps");
   document.getElementById("web-category").classList.toggle("active",category==="web");
+
   document.getElementById("apps-view").style.display=category==="apps"?"block":"none";
-  document.getElementById("web-empty").style.display=category==="web"?"block":"none";
-  document.getElementById("search").placeholder=category==="apps"?"جستجوی برنامه...":"جستجوی وب پنل...";
-  filterApps();
+  document.getElementById("web-view").style.display=category==="web"?"block":"none";
+
+  document.getElementById("search").placeholder=
+    category==="apps"?"جستجوی برنامه...":"جستجوی وب پنل...";
+
+  filterItems();
 }
-function openDetails(id) {
-  const app=apps[id]; if(!app)return;
+
+function openDetails(id){
+  const app=apps[id];
+  if(!app)return;
+
   document.getElementById("store-header").style.display="none";
   document.getElementById("store-page").style.display="none";
   document.getElementById("store-footer").style.display="none";
   document.getElementById("details").style.display="block";
+
   document.getElementById("details-title").textContent=app.title;
   document.getElementById("details-subtitle").textContent=app.subtitle;
   document.getElementById("details-icon").innerHTML=app.icon;
@@ -435,62 +587,112 @@ function openDetails(id) {
   document.getElementById("info-version").textContent=app.version;
   document.getElementById("info-repo").textContent=app.repo;
   document.getElementById("github-btn").href=app.url;
-  document.getElementById("update-btn").onclick=()=>window.open(app.releases,"_blank","noopener,noreferrer");
+
+  document.getElementById("update-btn").onclick=()=>{
+    window.open(app.releases,"_blank","noopener,noreferrer");
+  };
+
   const list=document.getElementById("details-version-list");
   list.replaceChildren();
+
   app.downloads.forEach(item=>{
-    const row=document.createElement("div"); row.className="details-version";
-    const symbol=document.createElement("div"); symbol.className="version-symbol"; symbol.textContent=item.symbol;
-    const info=document.createElement("div"); info.className="version-info";
-    const name=document.createElement("div"); name.className="version-name"; name.textContent=item.name;
-    const desc=document.createElement("div"); desc.className="version-desc"; desc.textContent=item.desc;
+    const row=document.createElement("div");
+    row.className="details-version";
+
+    const symbol=document.createElement("div");
+    symbol.className="version-symbol";
+    symbol.textContent=item.symbol;
+
+    const info=document.createElement("div");
+    info.className="version-info";
+
+    const name=document.createElement("div");
+    name.className="version-name";
+    name.textContent=item.name;
+
+    const desc=document.createElement("div");
+    desc.className="version-desc";
+    desc.textContent=item.desc;
+
     info.append(name,desc);
-    const btn=document.createElement("button"); btn.className="download-btn"; btn.textContent="دانلود ↓";
-    btn.onclick=()=>window.location.href=item.url;
-    row.append(symbol,info,btn); list.appendChild(row);
+
+    const btn=document.createElement("button");
+    btn.className="download-btn";
+    btn.textContent="دانلود ↓";
+    btn.onclick=()=>{window.location.href=item.url};
+
+    row.append(symbol,info,btn);
+    list.appendChild(row);
   });
+
   history.pushState({page:"details",app:id},"","#app-"+id);
   window.scrollTo(0,0);
 }
-function backToStore() {
+
+function backToStore(){
   document.getElementById("details").style.display="none";
   document.getElementById("store-header").style.display="";
   document.getElementById("store-page").style.display="";
   document.getElementById("store-footer").style.display="";
-  if(location.hash.startsWith("#app-")) history.replaceState({page:"store"},"",location.pathname+location.search);
+
+  if(location.hash.startsWith("#app-")){
+    history.replaceState({page:"store"},"",location.pathname+location.search);
+  }
   window.scrollTo(0,0);
 }
+
 window.addEventListener("popstate",()=>{
-  if(location.hash.startsWith("#app-")) {
+  if(location.hash.startsWith("#app-")){
     const id=location.hash.slice(5);
-    if(apps[id]) openDetails(id);
-  } else {
+    if(apps[id])openDetails(id);
+  }else{
     document.getElementById("details").style.display="none";
     document.getElementById("store-header").style.display="";
     document.getElementById("store-page").style.display="";
     document.getElementById("store-footer").style.display="";
   }
 });
-document.querySelectorAll(".app-card").forEach(card=>{
+
+document.querySelectorAll(".app-card[data-app]").forEach(card=>{
   card.addEventListener("click",event=>{
     if(event.target.closest("a,button"))return;
     openDetails(card.dataset.app);
   });
 });
+
 const search=document.getElementById("search");
-const cards=Array.from(document.querySelectorAll(".searchable"));
-function filterApps() {
+
+function filterItems(){
   const query=search.value.trim().toLowerCase();
-  let visible=0;
-  cards.forEach(card=>{
-    const match=(card.innerText+" "+card.dataset.name).toLowerCase().includes(query);
-    card.style.display=match?"":"none";
-    if(match)visible++;
-  });
-  document.getElementById("counter").textContent=visible+" برنامه";
-  document.getElementById("empty-state").style.display=currentCategory==="apps"&&!visible?"block":"none";
+
+  if(currentCategory==="apps"){
+    let visible=0;
+    document.querySelectorAll(".searchable").forEach(card=>{
+      const text=(card.innerText+" "+card.dataset.name).toLowerCase();
+      const match=text.includes(query);
+      card.style.display=match?"":"none";
+      if(match)visible++;
+    });
+    document.getElementById("counter").textContent=visible+" برنامه";
+    document.getElementById("empty-state").style.display=visible?"none":"block";
+  }else{
+    let visible=0;
+    document.querySelectorAll(".searchable-web").forEach(card=>{
+      const text=(card.innerText+" "+card.dataset.name).toLowerCase();
+      const match=text.includes(query);
+      card.style.display=match?"":"none";
+      if(match)visible++;
+    });
+    document.getElementById("web-empty").style.display=visible?"none":"block";
+  }
 }
-search.addEventListener("input",filterApps);
+
+search.addEventListener("input",filterItems);
+
+if(location.hash.startsWith("#app-")){
+  const id=location.hash.slice(5);
+  if(apps[id])openDetails(id);
+}
 </script>
-</body>
-  </html>
+
+</body></html>
